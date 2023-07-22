@@ -32,8 +32,8 @@ function App() {
   let routers = createHashRouter([
     { path: "", element: <Layout userData={userData} setUserData={setUserData} /> , children: [
       {index:true , element: <ProtectedRoutes><Home/></ProtectedRoutes>},
-      {path:"movies" , element: <ProtectedRoutes><Movies/></ProtectedRoutes>},
       {path:"home" , element: <ProtectedRoutes><Home/></ProtectedRoutes>},
+      {path:"movies" , element: <ProtectedRoutes><Movies/></ProtectedRoutes>},
       {path:"tvshow" , element: <ProtectedRoutes><Tvshow/></ProtectedRoutes>},
       {path:"people" , element: <ProtectedRoutes><People/></ProtectedRoutes>},
       {path:"moviedetails/:id/:mediaType" , element: <ProtectedRoutes><MovieDetails /></ProtectedRoutes>},

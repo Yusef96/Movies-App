@@ -16,6 +16,13 @@ export default function Register() {
   let navigate = useNavigate()
 
 
+  function goToLogin(){
+    navigate("/login")
+    // console.log("gello from register");
+  }
+
+
+
   async function sendRegisterData(values) {
     // console.log(values);
     setError(null)
@@ -36,7 +43,7 @@ export default function Register() {
   let myschema = Yub.object({
     name: Yub.string().required("name is required").min(3,"min char is 3").max(15,"max char is 15"),
     email: Yub.string().email("invalid email").required("required"),
-    password: Yub.string().matches(/^[A-Z][a-z0-9]{3,8}$/,"invalid password").required("required"),
+    password: Yub.string().matches(/^[A-Za-z0-9]{6,20}$/,"invalid password (password must be at least 6 characters long)").required("required"),
     rePassword: Yub.string().required("required").oneOf([Yub.ref('password')],"password does not match"),
     phone: Yub.string().required("required").matches(/^01[0125][0-9]{8}$/,"invalid")
 
@@ -92,6 +99,7 @@ export default function Register() {
 
 
           {isLoading ?<button type='submit' className='btn bg-success text-white'><i className='fa fa-spin fa-spinner'></i></button> :  <button  className='btn bg-success text-white'>Register</button>}
+           <button onClick={goToLogin}  className='btn bg-danger text-white mx-2'>Already have an account</button>
 
         </form>
 

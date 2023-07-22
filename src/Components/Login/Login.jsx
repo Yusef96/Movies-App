@@ -10,6 +10,10 @@ export default function Login({saveUser}) {
   const [error, setError] = useState(null)
   let navigate = useNavigate()
 
+  function goBack(){
+    navigate("/register")
+    // console.log("gello from goback");
+  }
 
   async function login(values) {
     // console.log(values);
@@ -24,7 +28,7 @@ export default function Login({saveUser}) {
       localStorage.setItem("userToken",data.token)
       saveUser()
       console.log(data);
-      navigate("/")
+      navigate("/home")
     }
 
 
@@ -32,7 +36,8 @@ export default function Login({saveUser}) {
 
   let myschema = Yub.object({
     email: Yub.string().email("invalid email").required("required"),
-    password: Yub.string().matches(/^[A-Z][a-z0-9]{3,8}$/, "invalid password").required("required"),
+    password:Yub.string().matches(/^[A-Za-z0-9]{6,20}$/,"invalid password ( password must be at least 6 characters long )").required("password is required"),
+    // password:Yup.string().matches(/^[A-Za-z0-9]{6,20}$/,"invalid password ( password must be at least 6 characters long )").required("password is required"),
 
   })
 
@@ -63,7 +68,8 @@ export default function Login({saveUser}) {
           <input type="password" name='password' id='password' className='form-control my-2' value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} />
           {formik.errors.password && formik.touched.password ? <div className='alert alert-danger'>{formik.errors.password}</div> : ""}
 
-          {isLoading ? <button type='submit' className='btn bg-success text-white'><i className='fa fa-spin fa-spinner'></i></button> : <button className='btn bg-success text-white'>Login</button>}
+          {isLoading ? <button type='submit' className='btn bg-success text-white'><i className='fa fa-spin fa-spinner'></i></button> : <button className='btn bg-success text-white me-3'>Login</button>}
+          <button onClick={goBack} className='btn bg-danger text-white my-2 ms-0'>Don't have an account yet?  Sign Up</button>
 
         </form>
 
